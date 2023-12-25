@@ -1,0 +1,29 @@
+.dark {
+    background-color: #1e1e2c;
+}
+.center_text {
+    margin-top: 5%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    text-align: center;
+    width: 50%;
+    border: 0px solid green;
+    padding: 10px;
+}
+.center_element {
+    display: block;
+    margin-top: 5%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    width: 50%;
+    border: 0px solid green;
+    padding: 10px;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}

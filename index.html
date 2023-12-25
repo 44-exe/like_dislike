@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+    <style>
+        .dark {
+            background-color: #1e1e2c;
+        }
+        .center_text {
+            margin-top: 5%;
+            margin-right: 20%;
+            margin-bottom: 5%;
+            margin-left: 20%;
+            text-align: center;
+            width: 50%;
+            border: 0px solid green;
+            padding: 10px;
+        }
+        .center_element {
+            display: block;
+            margin-top: 5%;
+            margin-right: 20%;
+            margin-bottom: 5%;
+            margin-left: 20%;
+            width: 50%;
+            border: 0px solid green;
+            padding: 10px;
+        }
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
+        }
+    </style>
+
+    <header>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="index.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Like & Subscribe!</title>
+    </header>
+    <body class="dark" onload="get_counter();">
+        <script type="text/javascript">
+            var counter = 0;
+
+            setInterval(get_counter, 3000);
+
+            function get_counter() {
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", "/get_counter");
+                xhr.send();
+                xhr.onload = function() {
+                    counter = Number(xhr.response);
+                    // alert(counter);
+                    if (counter === NaN) {
+                        counter = 0;
+                    }
+                    if (counter >= 0) {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-up\"></span>";
+                    }
+                    else {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-down\"></span>";
+                    }
+                    document.getElementById("main_counter").innerHTML = icon + " " + counter;
+                }
+            }
+
+            function count_up() {
+                // send it out
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", "/count_up");
+                xhr.send()
+                xhr.onload = function() {
+                    // alert(xhr.response);
+                    counter = Number(xhr.response);
+                    if (counter === NaN) {
+                        counter = 0;
+                    }
+                    let icon = "";
+                    if (counter === NaN) {
+                        counter = 0;
+                    }
+                    if (counter >= 0) {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-up\"></span>";
+                    }
+                    else {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-down\"></span>";
+                    }
+                    document.getElementById("main_counter").innerHTML = icon + " " + counter;
+                }
+            }
+
+            function count_down() {
+                // send it out
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", "/count_down");
+                xhr.send()
+                xhr.onload = function() {
+                    //alert(xhr.response);
+                    counter = Number(xhr.response);
+                    if (counter === NaN) {
+                        counter = 0;
+                    }
+                    let icon = "";
+                    if (counter >= 0) {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-up\"></span>";
+                    }
+                    else {
+                        icon = "<span class=\"glyphicon glyphicon-thumbs-down\"></span>";
+                    }
+                    document.getElementById("main_counter").innerHTML = icon + " " + counter;
+                }
+            }
+        </script>
+
+        <div class="container">
+            <div class="col">
+                <div class="row-md-6">
+                    <h2 id="main_counter" class="center_text" style="color: white;"><span class="glyphicon glyphicon-thumbs-up"></span> 0</h2>
+                </div>
+
+                <div class="row-md-6">
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <button class="btn btn-primary btn-lg center_element" onclick="count_up()">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            </button>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <button class="btn btn-danger btn-lg center_element" onclick="count_down()">
+                                <span class="glyphicon glyphicon-thumbs-down"></span> Dislike
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
